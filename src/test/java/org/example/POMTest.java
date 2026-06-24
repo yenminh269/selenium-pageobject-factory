@@ -1,5 +1,6 @@
 package org.example;
 
+import TestComponents.Retry;
 import TestComponents.SetUp;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -19,7 +20,7 @@ public class POMTest extends SetUp {
   LandingPage landingPage;
   String item = "Zara Coat 3";
 
-  @Test(dataProvider = "getData")
+  @Test(dataProvider = "getData", retryAnalyzer = Retry.class )
   public void submitOrder(HashMap<String, String> input) throws IOException, InterruptedException {
     landingPage = launchApplication();
 
@@ -46,13 +47,6 @@ public class POMTest extends SetUp {
     ProductCatalog productCatalog = landingPage.logIn("taesicbadao6@gmail.com","11626Oak!");
     OrderPage orderPage = productCatalog.goToOrderPage();
     Assert.assertTrue(orderPage.verifyProductOrder(item));
-  }
-
-  public void getScreenshot(String itemName) throws IOException {
-    TakesScreenshot ts = (TakesScreenshot) driver;
-    File src = ts.getScreenshotAs(OutputType.FILE);
-    File dest = new File(System.getProperty("user.dir")+"//reports//" + itemName + ".png");
-    FileUtils.copyFile(src, dest);
   }
 
   @DataProvider

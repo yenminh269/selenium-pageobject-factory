@@ -1,6 +1,9 @@
 package TestComponents;
 
+import org.apache.commons.io.FileUtils;
 import org.example.LandingPage;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -8,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
@@ -33,6 +37,16 @@ public class SetUp {
     driver.manage().window().maximize();
 
     return driver;
+  }
+
+
+  public String getScreenshot(String itemName,WebDriver _driver) throws IOException {
+    TakesScreenshot ts = (TakesScreenshot) _driver;
+    File src = ts.getScreenshotAs(OutputType.FILE);
+    String path = System.getProperty("user.dir")+"//report//" + itemName + ".png";
+    File dest = new File(path);
+    FileUtils.copyFile(src, dest);
+    return path;
   }
 
   @BeforeTest(alwaysRun = true)
