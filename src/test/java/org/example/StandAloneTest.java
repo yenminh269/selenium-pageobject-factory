@@ -40,7 +40,7 @@ public class StandAloneTest {
         driver.findElement(By.cssSelector("button[routerlink='/dashboard/cart']")).click();
 
         List<WebElement> cart = driver.findElements(By.cssSelector(".cartSection h3"));
-        Boolean isAdded = cart.stream().anyMatch(e -> e.getText().equalsIgnoreCase(item));
+        boolean isAdded = cart.stream().anyMatch(e -> e.getText().equalsIgnoreCase(item));
         Assert.assertTrue(isAdded);
 
         driver.findElement(By.cssSelector(".totalRow button")).click();
