@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class errorValidation extends SetUp {
+public class errorValidationTest extends SetUp {
   @Test(groups={"ErrorHandling"})
   public void errorValidate() throws IOException {
     LandingPage landingPage = launchApplication();

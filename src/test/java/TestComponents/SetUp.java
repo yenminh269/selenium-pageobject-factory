@@ -6,6 +6,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
@@ -23,10 +24,21 @@ public class SetUp {
     Properties prop = new Properties();
     FileInputStream input = new FileInputStream(System.getProperty("user.dir")+"//src//main//java//resources//data.properties");
     prop.load(input);
-    String browser = prop.getProperty("browser");
+
+    String browser = (System.getProperty("browser")) != null ? System.getProperty("browser") : prop.getProperty("browser");
+    browser = browser.trim().toLowerCase();
+
+    System.out.println("Browser value = " + browser);
 
     if (browser.equalsIgnoreCase("chrome")) {
       driver = new ChromeDriver();
+    }
+    else if (browser.equalsIgnoreCase("chromeheadless")) {
+      ChromeOptions options = new ChromeOptions();
+
+      options.addArguments("--headless=new");
+      driver = new ChromeDriver(options);
+
     }else if (browser.equalsIgnoreCase("firefox")) {
       driver = new FirefoxDriver();
     }else if (browser.equalsIgnoreCase("edge")) {

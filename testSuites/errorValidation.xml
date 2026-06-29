@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite parallel="tests" name="Loan Department">
+<suite name="Error Validate">
     <groups>
         <run>
             <include name="ErrorHandling"/>
@@ -9,15 +9,9 @@
     <listeners>
         <listener class-name="TestComponents.Listeners"/>
     </listeners>
-    <test thread-count="5" name="Standard Test">
-        <classes>
-            <class name="org.example.POMTest"/>
-        </classes>
-    </test>
-
     <test name="Error Validation Test">
         <classes>
-            <class name="org.example.errorValidation"/>
+            <class name="org.example.errorValidationTest"/>
         </classes>
     </test>
 </suite>
